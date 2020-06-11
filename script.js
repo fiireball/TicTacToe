@@ -1,5 +1,5 @@
 
-
+// ###### Game Board ######
 
 const gameBoard = (() => {
     // var
@@ -55,6 +55,11 @@ const gameBoard = (() => {
 
     }
 
+    function resetBoard() {
+        board = []
+        _createBoardArray
+        renderBoard()
+    }
 
     function insertMoveToBoard(dataCellIndex, currentPlayer){
         
@@ -62,23 +67,31 @@ const gameBoard = (() => {
         renderBoard()
     }
 
-    
+    function getBoard() {
+        return board
+    }
+
     function getBoardsize() {
         return boardSize
     }
+
+
 
     return {
         // return public stuff
         setBoardSize,
         insertMoveToBoard,
         renderBoard,
-        board,
         getBoardsize,
+        resetBoard,
+        getBoard
         
     }
 })();
 
 
+
+// ###### Player Factory ######
 
 const Player = (name, symbol) => {
     return {
@@ -89,10 +102,13 @@ const Player = (name, symbol) => {
 }
 
 
+// ###### Game Logic ######
+
 const mainGame = (() => {
 
-    player1 = Player("X-Player", "x")
-    player2 = Player("O-Player", "o")
+    let board = gameBoard.getBoard()
+    let player1 = Player("X-Player", "x");
+    let player2 = Player("O-Player", "o");
 
     let currentPlayer = player1;
 
@@ -110,14 +126,14 @@ const mainGame = (() => {
 
 
         return e => {
-            console.log(e.target.dataset.index)
+            console.log(e.target.dataset.index);
             if (e.target.textContent === "") {
-              gameBoard.insertMoveToBoard(e.target.dataset.index, currentPlayer)
+              gameBoard.insertMoveToBoard(e.target.dataset.index, currentPlayer);
             }
             if (didWin()) {
-                console.log(`Congrats! ${currentPlayer.name} won!`)
+                gameEndWin(currentPlayer);
             }
-            swapPlayers()
+            swapPlayers();
         };
         
 
@@ -144,7 +160,7 @@ const mainGame = (() => {
             winCases = [];
 
             for (let j = 0; j < boardDimension ; j++) {
-                winCases.push(gameBoard.board[j*3+i])
+                winCases.push(board[j*3+i])
             }
 
             if (_checkWinConditions(winCases)) return true
@@ -156,7 +172,7 @@ const mainGame = (() => {
             winCases = []
             
             for (let j = 0; j < boardDimension; j++) {
-                winCases.push(gameBoard.board[i*3+j])
+                winCases.push(board[i*3+j])
                 
             }
 
@@ -169,7 +185,7 @@ const mainGame = (() => {
         winCases = []
 
         for (let i = 0; i < boardDimension; i++) {
-            winCases.push(gameBoard.board[i*(boardDimension+1)])
+            winCases.push(board[i*(boardDimension+1)])
            
         }
         if (_checkWinConditions(winCases)) return true
@@ -179,7 +195,7 @@ const mainGame = (() => {
         winCases = []
         
         for (let i = 0; i < boardDimension; i++) {
-            winCases.push(gameBoard.board[i*2+(boardDimension-1)])
+            winCases.push(board[i*2+(boardDimension-1)])
          
         }
 
@@ -187,7 +203,7 @@ const mainGame = (() => {
 
 
         // tie
-        if (gameBoard.board.indexOf('') == -1) {
+        if (board.indexOf('') == -1) {
             console.log("It's a draw!")
             gameEndDraw()
         }
@@ -196,12 +212,22 @@ const mainGame = (() => {
 
 
     function gameEndDraw(){
-
+        console.log('draw');
+        setTimeout(() => {
+            confirm('Restart game?') ? restartGame() : "gg"
+        }, 100)
+       
     }
 
-
-    function gameEndWin(currentPlayer) {
-        
+    function gameEndWin(currentPlayer){
+        console.log(currentPlayer.name + ' has won.');
+        setTimeout(() => {
+            confirm('Restart game?') ? restartGame() : "gg"
+        }, 100)
+    }    
+    
+    function restartGame() {
+        gameBoard.setBoardSize(gameBoard.getBoardsize())
     }
 
 
@@ -209,9 +235,6 @@ const mainGame = (() => {
         placeMove,
         currentPlayer,
         didWin,
-        swapPlayers,
-        player1,
-        player2,
     }
 
 })()
