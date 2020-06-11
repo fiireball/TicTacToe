@@ -107,9 +107,9 @@ const Player = (name, symbol) => {
 const mainGame = (() => {
 
     
+    
     let player1 = Player("X-Player", "x");
     let player2 = Player("O-Player", "o");
-
     let currentPlayer = player1;
 
     function swapPlayers() {
@@ -121,10 +121,6 @@ const mainGame = (() => {
     }
 
     function placeMove() {
-
-        console.log('click')
-
-
         return e => {
             console.log(e.target.dataset.index);
             if (e.target.textContent === "") {
@@ -135,8 +131,6 @@ const mainGame = (() => {
             }
             swapPlayers();
         };
-        
-
     }
 
 
@@ -212,10 +206,28 @@ const mainGame = (() => {
     }
 
 
-    function gameEndDraw(){
-        console.log('draw');
-        setTimeout(() => {
-            confirm('Restart game?') ? restartGame() : "gg"
+
+
+    // GAME OVER ###     
+    gameOverWindow = document.querySelector('.gameover-container')
+    gameOverOverlay = document.querySelector('.overlay')
+    gameOverMsg = document.getElementById('gameoverMessage')
+
+    function gameOver(currentPlayer) {
+        if (currentPlayer) {
+            gameoverMessage.textContent = `Congrats ${currentPlayer.name}! Play again?`
+        } else {
+            gameoverMessage.textContent = `It's a draw! Play again?`
+        }
+
+        gameOverOverlay.classList.add('active')
+        gameOverWindow.classList.add('active')
+    }
+
+    function gameEndDraw(){                                    
+        console.log('draw');                                   
+        setTimeout(() => {                                     
+            gameOver()
         }, 100)
        
     }
@@ -223,7 +235,7 @@ const mainGame = (() => {
     function gameEndWin(currentPlayer){
         console.log(currentPlayer.name + ' has won.');
         setTimeout(() => {
-            confirm('Restart game?') ? restartGame() : "gg"
+            gameOver(currentPlayer)
         }, 100)
     }    
     
@@ -236,6 +248,7 @@ const mainGame = (() => {
         placeMove,
         currentPlayer,
         didWin,
+        restartGame,
     }
 
 })()
@@ -245,7 +258,12 @@ const mainGame = (() => {
 
 const eventHandler = (() => {
     // DOM Caching
-    
+    restartButton = document.getElementById('restart-btn')
+    settingsButton = document.getElementById('settings-btn')
+    playAgainButton = document.getElementById('playagain-btn')
+    gameOverWindow = document.querySelector('.gameover-container')
+    gameOverOverlay = document.querySelector('.overlay')
+
 
     // Add Listeners to each cell
 
@@ -263,12 +281,49 @@ const eventHandler = (() => {
         });
     }
 
+    function restartBtn() {
+        restartButton.addEventListener('click', () => {
+            gameBoard.setBoardSize(gameBoard.getBoardsize())
+        })
+    }
+
+    function settingsBtn() {
+        settingsButton.addEventListener('click', function openSettings() {
+            console.log('placeholder')
+            return
+        })
+    }
+
+    function playAgainBtn() {
+        playAgainButton.addEventListener('click', () => {
+            gameBoard.setBoardSize(gameBoard.getBoardsize())
+            gameOverWindow.classList.remove('active')
+            gameOverOverlay.classList.remove('active')
+        })
+    }
+
+
     return {
         add,
-        remove
+        remove,
+        restartBtn,
+        settingsBtn,
+        playAgainBtn
     }
 
 })()
 
+//##### Player name input field
+
+//##### Make it prettier
+
+//##### AI Player random
+
+//##### AI Player minimax
+
+//##### Swap between human vs (human || dumb AI || impossible AI)
 
 gameBoard.renderBoard()
+eventHandler.restartBtn()
+eventHandler.settingsBtn()
+eventHandler.playAgainBtn()
