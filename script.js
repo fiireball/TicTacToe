@@ -106,7 +106,7 @@ const Player = (name, symbol) => {
 
 const mainGame = (() => {
 
-    let board = gameBoard.getBoard()
+    
     let player1 = Player("X-Player", "x");
     let player2 = Player("O-Player", "o");
 
@@ -153,6 +153,7 @@ const mainGame = (() => {
         let isWinner;
         let winCases = []
         let boardDimension = gameBoard.getBoardsize()
+        let board = gameBoard.getBoard()
 
         //columns
         for (let i = 0; i < boardDimension ; i++) {
@@ -160,7 +161,7 @@ const mainGame = (() => {
             winCases = [];
 
             for (let j = 0; j < boardDimension ; j++) {
-                winCases.push(board[j*3+i])
+                winCases.push(board[j*boardDimension+i])
             }
 
             if (_checkWinConditions(winCases)) return true
@@ -172,7 +173,7 @@ const mainGame = (() => {
             winCases = []
             
             for (let j = 0; j < boardDimension; j++) {
-                winCases.push(board[i*3+j])
+                winCases.push(board[i*boardDimension+j])
                 
             }
 
