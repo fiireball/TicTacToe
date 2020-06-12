@@ -19,7 +19,6 @@ const gameBoard = (() => {
     _createBoardArray(boardSize)
 
     function renderBoard(boardArray) {
-        
 
         _clearBoard()
 
@@ -52,7 +51,6 @@ const gameBoard = (() => {
         gameContainer.style.gridTemplateRows = `repeat(${boardSize}, 1fr)`;      
 
         renderBoard()
-
     }
 
     function resetBoard() {
@@ -61,8 +59,7 @@ const gameBoard = (() => {
         renderBoard()
     }
 
-    function insertMoveToBoard(dataCellIndex, currentPlayer){
-        
+    function insertMoveToBoard(dataCellIndex, currentPlayer){    
         board[dataCellIndex] = currentPlayer.symbol
         renderBoard()
     }
@@ -74,8 +71,6 @@ const gameBoard = (() => {
     function getBoardsize() {
         return boardSize
     }
-
-
 
     return {
         // return public stuff
@@ -90,9 +85,7 @@ const gameBoard = (() => {
 })();
 
 
-
 // ###### Player Factory ######
-
 const Player = (name, symbol) => {
     return {
         name,
@@ -103,7 +96,6 @@ const Player = (name, symbol) => {
 
 
 // ###### Game Logic ######
-
 const mainGame = (() => {
 
     
@@ -132,7 +124,6 @@ const mainGame = (() => {
         };
     }
 
-
     function _checkWinConditions(winCases) {
         if (!winCases.includes('') && (!winCases.includes('x') || !winCases.includes('o'))) {
             console.log('someone won.');
@@ -140,7 +131,6 @@ const mainGame = (() => {
             return true   
         }
     }
-
 
     function didWin() {
         let isWinner;
@@ -184,8 +174,7 @@ const mainGame = (() => {
         }
         if (_checkWinConditions(winCases)) return true
         
-        
-
+       
         winCases = []
         
         for (let i = 0; i < boardDimension; i++) {
@@ -203,9 +192,6 @@ const mainGame = (() => {
         }
 
     }
-
-
-
 
     // GAME OVER ###     
     gameOverWindow = document.querySelector('.gameover-container')
@@ -242,7 +228,6 @@ const mainGame = (() => {
         gameBoard.setBoardSize(gameBoard.getBoardsize())
     }
 
-
     return {
         placeMove,
         currentPlayer,
@@ -251,8 +236,6 @@ const mainGame = (() => {
     }
 
 })()
-
-
 
 
 const eventHandler = (() => {
@@ -300,7 +283,6 @@ const eventHandler = (() => {
             gameOverOverlay.classList.remove('active')
         })
     }
-
 
     return {
         add,

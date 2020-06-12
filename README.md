@@ -4,7 +4,7 @@ Tic Tac Toe Practice Project
 Trying to improve OOP Javascript
 ------------
 
-## To-Do list:
+### To-Do list:
 
 1. add Playername input
 2. add dumb AI (random choice)

@@ -122,12 +122,35 @@ button{
     text-shadow: rgb(187, 187, 187) 1px 1px 5px;
 }
 
+button:focus {
+    outline: none;
+}
+
 button#restart-btn, button#playagain-btn{
     background-image: linear-gradient(-70deg,rgb(0, 209, 87),rgb(49, 231, 59));
+    box-shadow: 0 5px rgba(0, 0, 0, 0.25);
+}
+
+button#restart-btn:hover, button#playagain-btn:hover{
+    background-image: linear-gradient(-70deg,rgb(0, 192, 80),rgb(45, 216, 54));
 }
 
 button#settings-btn{
     background-image: linear-gradient(-270deg, rgb(235, 130, 10) , rgb(255, 94, 0));
+    box-shadow: 0 6px rgba(0, 0, 0, 0.25);
+}
+button#settings-btn:hover{
+    background-image: linear-gradient(-270deg, rgb(206, 115, 10) , rgb(224, 82, 0));
+}
+
+button#settings-btn:active{
+    box-shadow: 0 2px rgba(0, 0, 0, 0.35);
+    transform: translateY(4px);
+}
+
+button#restart-btn:active, button#playagain-btn:active{
+    box-shadow: 0 2px rgba(0, 0, 0, 0.35);
+    transform: translateY(4px);
 }
 
 .gameover-container {
@@ -139,6 +162,7 @@ button#settings-btn{
     text-align: center;
     border: 1px solid black;
     border-radius: 10px;
+    box-shadow: rgb(82, 82, 82) 1px 1px;
     padding: 2vw;
     z-index: 10;
     background-color: lightcyan;
@@ -150,8 +174,7 @@ button#settings-btn{
     transform: translate(-50%,-50%) scale(1);
 }
 
-.gameover-container h2{
-}
+
 
 .overlay {
     transition: 200ms ease-in-out;
