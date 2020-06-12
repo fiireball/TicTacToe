@@ -29,6 +29,34 @@
                 <button data-playagain-btn id="playagain-btn">Play again!</button>
             </div>
         </div>
+        <div class="settings-window-container">
+            <div class="settings-header">
+                <span class="title">Settings</span>
+                <button id="close-settings-btn">X</button>
+           </div>
+            <div class="settings-inner">
+
+                <div class="playername-inputs">  
+                    <span class="title">Choose Player Names</span>       
+                    <input placeholder="Player 1" type="text">
+                    <input placeholder="Player 2" type="text">
+                    
+                </div>
+                <div class="difficulty-inputs">
+                    <span class="title">Playmode & Difficulty</span>
+                    <label for="playmode">Play against: </label>
+                    <select name="playmode" id="playmode">
+                    <option value="human">Human (local)</option>
+                    <option value="AIEasy">AI Easy</option>
+                    <option value="AIHard">AI Hard</option>
+                    </select>
+                </div>
+                <div class="apply-container">
+                    <button data-apply-btn id="apply-btn">Apply</button>
+                </div>
+            </div>
+           
+        </div>
         <div class="controls-container">
             <div class="settings-container">
             <button id="settings-btn" type="">Settings</button>
