@@ -64,7 +64,7 @@ body {
     width: 50%;
     position: relative;
     margin: auto;
-    
+    z-index: ;
 }
 
 .game-board-outer:after{
@@ -72,8 +72,10 @@ body {
     display: block;
     padding-bottom: 100%;
     background-color: rgb(22, 28, 63);
+}
 
-
+.game-board-outer img{
+    position: absolute;
 }
 
 .game-board-inner {
@@ -84,17 +86,23 @@ body {
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
     color: whitesmoke;
+    
 }
 
 .game-square{
     height: 100%;
     width: 100%;
-    border: 1px rgb(174, 221, 219) solid;
+    border: none;
     display: flex;
     justify-content: center;
     align-items: center;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 7vw;
+}
+
+.game-square img{
+    pointer-events: none;
+    width: 33%;
 }
 
 .controls-container{

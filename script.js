@@ -7,7 +7,8 @@ const gameBoard = (() => {
     let boardSize = 3
     
     // DOM Caching
-    let gameContainer = document.querySelector('.game-board-inner');
+    const gameContainer = document.querySelector('.game-board-inner');
+
 
     function _createBoardArray(height) {
         board = []
@@ -25,12 +26,22 @@ const gameBoard = (() => {
         let cellIndex = 0;
 
         board.forEach(() => {
-            
+
+            const xImg = document.createElement('img')
+            const oImg = document.createElement('img')
+            xImg.setAttribute("src", "img/fiireball-x.svg")
+            oImg.setAttribute("src", "img/fiireball-o.svg")
             let gameSquare = document.createElement('div')
             gameSquare.classList.add('game-square')
             gameSquare.setAttribute("data-index", cellIndex)
-            gameSquare.textContent = board[cellIndex]
+            //gameSquare.textContent = board[cellIndex]
             gameContainer.appendChild(gameSquare)
+            if (board[cellIndex] === "x"){
+                gameSquare.appendChild(xImg)
+            }
+            if (board[cellIndex] === "o"){
+                gameSquare.appendChild(oImg)
+            }
             cellIndex++
         })
 
@@ -116,7 +127,7 @@ const mainGame = (() => {
     function placeMove() {
         
         return e => {
-            if (e.target.textContent === "") {
+            if (gameBoard.getBoard()[e.target.dataset.index] === "") {
                 gameBoard.insertMoveToBoard(e.target.dataset.index, currentPlayer);
             }
             if (didWin()) {
@@ -304,7 +315,7 @@ const eventHandler = (() => {
         gameCells = document.querySelectorAll('.game-square')
         
         gameCells.forEach(cell => {
-            if (cell.textContent == "") {
+            if (!cell.hasChildNodes()) {
                 cell.addEventListener('click', mainGame.placeMove());
             }
         });
