@@ -122,7 +122,6 @@ const mainGame = (() => {
 
     function placeMove() {
         return e => {
-            console.log(e.target.dataset.index);
             if (e.target.textContent === "") {
               gameBoard.insertMoveToBoard(e.target.dataset.index, currentPlayer);
             }
@@ -312,7 +311,7 @@ const eventHandler = (() => {
     }
 
 })()
-
+// TO DO LIST #############
 //##### Player name input field
 
 //##### Make it prettier
