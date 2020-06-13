@@ -7,9 +7,9 @@ Trying to improve OOP Javascript
 ### To-Do list:
 
 1. add Playername input
-2. add dumb AI (random choice)
+2. ~add dumb AI (random choice)~
 3. add smart AI (minimax)
 4. add settings function to swap between human vs (human || dumb AI || smart AI)
-
+5. ~add SVGs for board and icons~
 
 [Live Version](https://fiireball.github.io/TicTacToe/)
